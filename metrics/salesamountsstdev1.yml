@@ -1,0 +1,8 @@
+unique_name: salesamountsstdev1
+object_type: metric
+label: Sales Amount SStdev
+calculation_method: stddev_samp
+format: "$#,##0.00"
+unrelated_dimensions_handling: error
+dataset: factinternetsales
+column: salesamount

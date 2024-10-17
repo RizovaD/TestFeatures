@@ -1,0 +1,27 @@
+unique_name: Style
+object_type: dimension
+label: Style
+type: standard
+
+hierarchies:
+
+  - unique_name: Style Hierarchy
+    label: Style Hierarchy
+
+    levels:
+
+      - unique_name: Style Level
+
+level_attributes:
+
+  - unique_name: Style Level
+    label: Style Level
+    is_unique_key: true
+    dataset: dimstyle
+    name_column: stylename
+    key_columns:
+      - stylekey
+
+modeler_metadata:
+  version: 0
+  modified: "false"

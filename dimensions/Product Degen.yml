@@ -1,0 +1,82 @@
+unique_name: Product Degen
+object_type: dimension
+label: Product Degen
+is_degenerate: true
+
+hierarchies:
+
+  - unique_name: Product_Key
+    label: Product Degen Hier
+    folder: Degens
+    default_member: "[Product].[Product].[&23]"
+    filter_empty: "yes"
+
+    levels:
+
+      - unique_name: Product Color
+
+      - unique_name: Product_Key
+        is_hidden: true
+
+        secondary_attributes:
+
+          - unique_name: d_product_info
+            label: Product Info Secondary Degen
+            folder: Degens
+            custom_empty_member:
+              key:
+                - Unknown
+              name: Unknown
+              sort_name: 0
+            dataset: factinternetsales
+            name_column: product_info
+            key_columns:
+              - product_info
+            sort_column: product_info
+
+          - unique_name: d_simple_calc
+            label: Simple Calc
+            format: General Number
+            folder: Degens
+            dataset: factinternetsales
+            name_column: simple_calc
+            key_columns:
+              - simple_calc
+            sort_column: simple_calc
+
+        aliases:
+
+          - unique_name: m_productkey_sum
+            label: Product Degenerate Alias
+            format: Scientific
+            folder: Product Attributes
+            dataset: factinternetsales
+            name_column: productkey
+            sort_column: productkey
+            allowed_calcs_for_dma:
+              - Lag
+              - Range
+              - Siblings
+
+level_attributes:
+
+  - unique_name: Product Color
+    label: Product Color
+    dataset: factinternetsales
+    name_column: color
+    key_columns:
+      - color
+
+  - unique_name: Product_Key
+    label: Product Degen Leaf
+    description: This is my product description for the degenerate attribute
+    is_hidden: true
+    format: 0.00
+    dataset: factinternetsales
+    name_column: productkey
+    key_columns:
+      - productkey
+
+modeler_metadata:
+  version: 0
+  modified: "false"

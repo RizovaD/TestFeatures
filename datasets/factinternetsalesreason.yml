@@ -1,0 +1,13 @@
+unique_name: factinternetsalesreason
+object_type: dataset
+label: factinternetsalesreason
+connection_id: BigQuery
+table: factinternetsalesreason
+
+columns:
+  - name: salesorderlinenumber
+    data_type: long
+  - name: salesordernumber
+    data_type: string
+  - name: salesreasonkey
+    data_type: long

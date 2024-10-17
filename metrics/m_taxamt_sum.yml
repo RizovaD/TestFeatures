@@ -1,0 +1,6 @@
+unique_name: m_taxamt_sum
+object_type: metric
+label: Tax Amount 2
+calculation_method: sum
+dataset: factdemotab
+column: taxamt

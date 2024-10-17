@@ -1,0 +1,4 @@
+unique_name: Simple Calc
+object_type: metric_calc
+label: Simple Calc
+expression: 0

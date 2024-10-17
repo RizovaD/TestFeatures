@@ -1,0 +1,43 @@
+unique_name: Dim Sales Reasons
+object_type: dimension
+label: Dim Sales Reasons
+type: standard
+
+hierarchies:
+
+  - unique_name: Dim Sales Reasons Hierarchy
+    label: Dim Sales Reasons Hierarchy
+
+    levels:
+
+      - unique_name: Sales Reason Group
+
+      - unique_name: Dim Sales Reasons Level
+
+level_attributes:
+
+  - unique_name: Dim Sales Reasons Level
+    label: Dim Sales Reasons Level
+    is_unique_key: true
+    dataset: dimsalesreason
+    name_column: salesreasonname
+    key_columns:
+      - salesreasonkey
+
+  - unique_name: Sales Reason Group
+    label: Sales Reason Group
+    dataset: dimsalesreason
+    name_column: salesreasongroup
+    key_columns:
+      - salesreasongroup
+    allowed_calcs_for_dma:
+      - Ancestor
+      - Descendants
+      - Lag
+      - ParallelPeriod
+      - Range
+      - Siblings
+
+modeler_metadata:
+  version: 0
+  modified: "false"

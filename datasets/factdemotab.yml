@@ -1,0 +1,35 @@
+unique_name: factdemotab
+object_type: dataset
+label: factdemotab
+connection_id: BigQuery
+table: factdemotab
+
+columns:
+  - name: color
+    data_type: string
+  - name: customerkey
+    data_type: int
+  - name: orderdate
+    data_type: string
+  - name: orderdatekey
+    data_type: int
+  - name: orderquantity
+    data_type: int
+  - name: productkey
+    data_type: int
+  - name: salesamount
+    data_type: double
+  - name: salesorderlinenumber
+    data_type: int
+  - name: salesordernumber
+    data_type: string
+  - name: size
+    data_type: string
+  - name: style
+    data_type: string
+  - name: taxamt
+    data_type: double
+  - name: unitprice
+    data_type: double
+  - name: weight
+    data_type: double

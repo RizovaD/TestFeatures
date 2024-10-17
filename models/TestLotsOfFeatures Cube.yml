@@ -1,0 +1,383 @@
+unique_name: TestLotsOfFeatures Cube
+object_type: model
+label: Test Lots of Features Cube
+description: Here's our cube description
+include_default_drillthrough: true
+visible: true
+
+relationships:
+
+  - unique_name: factinternetsales_Sales_Reasons_Bridge
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - salesordernumber
+        - salesorderlinenumber
+    to:
+      dimension: Sales Reasons Bridge
+      level: Sales Reasons Bridge Level
+
+  - unique_name: factinternetsales_Order_Dim
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - salesorderlinenumber
+        - salesordernumber
+        - currencykey
+    to:
+      dimension: Order Dim
+      level: order_line_item
+
+  - unique_name: factinternetsales_Security_Dim
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - salesordernumber
+    to:
+      dimension: Security Dim
+      level: Security Dim_user_id
+
+  - unique_name: factinternetsales_Product_Dimension
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - productkey
+    to:
+      dimension: Product Dimension
+      level: Product Name
+
+  - unique_name: factinternetsales_Customer_Dimension_First
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - customerkey
+    to:
+      dimension: Customer Dimension
+      level: Customer Name
+    role_play: "First {0}"
+
+  - unique_name: factinternetsales_Date_Dimension_Order
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - orderdatekey
+    to:
+      dimension: Date Dimension
+      level: DayMonth
+    role_play: "Order {0}"
+
+  - unique_name: factinternetsales_Date_Dimension_Ship
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - shipdatekey
+    to:
+      dimension: Date Dimension
+      level: DayMonth
+    role_play: "Ship {0}"
+
+  - unique_name: factdemotab_(1)_Date_Dimension_Order
+    from:
+      dataset: factdemotab (1)
+      join_columns:
+        - orderdatekey
+    to:
+      dimension: Date Dimension
+      level: DayMonth
+    role_play: "Order {0}"
+
+dimensions:
+  - Order Degen Shared
+  - Product Degen
+  - Size_1
+
+metrics:
+
+  - unique_name: calculatedtax1
+    folder: Sales Metrics
+
+  - unique_name: customercount1
+    folder: Customer Metrics
+
+  - unique_name: customercountestimate1
+    folder: Customer Metrics
+
+  - unique_name: First Customer Dimension_2
+
+  - unique_name: lastproductunitprice
+    folder: Product Metrics
+
+  - unique_name: m_orderquantity_per
+
+  - unique_name: m_salesamount_per
+
+  - unique_name: Total_Tax_1
+
+  - unique_name: maxOrderDate
+    folder: Time Relative
+
+  - unique_name: maxtaxamount1
+    folder: Sales Metrics
+
+  - unique_name: MinOrderDate
+    folder: Time Relative
+
+  - unique_name: orderquantity1
+    folder: Sales Metrics
+
+  - unique_name: Sales_Amount_1
+    folder: Sales Metrics
+
+  - unique_name: salesamountAvg1
+    folder: Sales Metrics
+
+  - unique_name: salesamountsstdev1
+    folder: Sales Metrics
+
+  - unique_name: soldproductNDC1
+    folder: Sales Metrics
+
+  - unique_name: Average Sales per Order
+    folder: Time Relative
+
+  - unique_name: Sales Amount-Order Retail445-YTD
+    folder: Time Relative
+
+  - unique_name: Simple Calc
+    folder: Other Calcs
+
+dataset_properties:
+  factinternetsales:
+    create_hinted_aggregate: true
+
+perspectives:
+
+  - unique_name: Test Perspective
+
+    metrics:
+      - Sales Amount-Order Retail445-YTD
+      - customercount1
+      - Total_Tax_1
+      - calculatedtax1
+      - m_orderquantity_per
+      - lastproductunitprice
+      - salesamountsstdev1
+      - m_salesamount_per
+
+    dimensions:
+
+      - name: Gender Dimension
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+        visible: false
+
+      - name: Size_1
+        visible: false
+
+      - name: Geography Dimension
+        hierarchies:
+          - name: Geography City
+            levels:
+              - City
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+
+      - name: Geography Dimension
+        hierarchies:
+          - name: Geography City
+            levels:
+              - City
+        relationships_path:
+          - CustomerDimension_GeographyDimension_Customer
+
+      - name: Customer Dimension
+        hierarchies:
+          - name: Customer Hierarchy
+            levels:
+              - Customer Name
+        secondaryattributes:
+          - Occupation
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+
+      - name: Date Dimension
+        hierarchies:
+          - name: Date Month Hierarchy
+            levels:
+              - Month1
+          - name: Date Week Hierarchy
+            visible: false
+        secondaryattributes:
+          - Day_Date
+        relationships_path:
+          - factinternetsales_Date_Dimension_Ship
+
+      - name: Customer Dimension
+        secondaryattributes:
+          - d_firstname
+          - d_lastname
+
+      - name: Product Degen
+        secondaryattributes:
+          - d_product_info
+
+drillthroughs:
+
+  - unique_name: Customer Details
+    attributes:
+
+      - name: Customer Name
+        dimension: Customer Dimension
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+
+      - name: m_listprice_max
+        dimension: Product Dimension
+
+      - name: Size Level
+        dimension: Size_1
+
+      - name: Style Level
+        dimension: Style
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+          - CustomerDimension_GeographyDimension
+          - GeographyDimension_Style_Step3
+
+    metrics:
+      - Sales_Amount_1
+      - orderquantity1
+      - Total_Tax_1
+      - soldproductNDC1
+      - m_orderquantity_per_instance_0.25
+      - m_orderquantity_per_instance_0.75
+      - Sales Amount-Order Retail445-YTD
+      - salesamountsstdev1
+
+  - unique_name: Shipping Details
+    notes: Here are some Notes
+    attributes:
+
+      - name: Customer Name
+        dimension: Customer Dimension
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+
+      - name: Product Name
+        dimension: Product Dimension
+
+    metrics:
+      - Sales_Amount_1
+      - orderquantity1
+      - Sales Amount-Order Retail445-YTD
+      - lastproductunitprice
+
+aggregates:
+
+  - unique_name: My UDA
+    label: My UDA
+    target_connection: BigQuery
+    attributes:
+
+      - name: Product Line
+        dimension: Product Dimension
+        partition: name
+        distribution: name
+
+      - name: Size Level
+        dimension: Size_1
+
+      - name: Order Degen Shared Level
+        dimension: Order Degen Shared
+
+      - name: currency
+        dimension: Order Dim
+        partition: name+key
+
+      - name: typeorder
+        dimension: Order Dim
+        partition: key
+        distribution: key
+
+      - name: d_week_of_year
+        dimension: Date Dimension
+        distribution: name+key
+        relationships_path:
+          - factinternetsales_Date_Dimension_Ship
+
+      - name: d_city
+        dimension: Geography Dimension
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+          - CustomerDimension_GeographyDimension_Customer
+
+      - name: Style Level
+        dimension: Style
+        partition: name+key
+        distribution: name+key
+        relationships_path:
+          - factinternetsales_Customer_Dimension_First
+          - CustomerDimension_GeographyDimension
+          - GeographyDimension_Style_Step3
+
+    metrics:
+      - m_listprice_max
+      - Sales Amount-Order Retail445-YTD
+      - m_orderquantity_per
+      - Total_Tax_1
+      - customercount1
+
+partitions:
+
+  - unique_name: TestLotsOfFeatures Cube.Customer Dimension.Occupation.partition
+    dimension: Customer Dimension
+    attribute: Occupation
+    type: name
+    relationships_path:
+      - factinternetsales_Customer_Dimension_First
+
+  - unique_name: TestLotsOfFeatures Cube.Security Dim.Security Dim_user_id.partition
+    dimension: Security Dim
+    attribute: Security Dim_user_id
+    type: name
+
+  - unique_name: TestLotsOfFeatures Cube.Size_1.Size Level.partition
+    dimension: Size_1
+    attribute: Size Level
+    type: key
+
+  - unique_name: TestLotsOfFeatures Cube.Date Dimension.Month1.partition
+    dimension: Date Dimension
+    attribute: Month1
+    type: key
+    relationships_path:
+      - factinternetsales_Date_Dimension_Ship
+
+  - unique_name: TestLotsOfFeatures Cube.Date Dimension.YearMonth.partition
+    dimension: Date Dimension
+    attribute: YearMonth
+    type: key
+    relationships_path:
+      - factinternetsales_Date_Dimension_Ship
+
+  - unique_name: TestLotsOfFeatures Cube.Date Dimension.Quarter.partition
+    dimension: Date Dimension
+    attribute: Quarter
+    type: key
+    relationships_path:
+      - factinternetsales_Date_Dimension_Ship
+
+  - unique_name: TestLotsOfFeatures Cube.Date Dimension.DayMonth.partition
+    dimension: Date Dimension
+    attribute: DayMonth
+    type: key
+    relationships_path:
+      - factinternetsales_Date_Dimension_Ship
+
+overrides:
+  Size_1:
+    query_name: Size
+  Sales_Amount_1:
+    query_name: salesamount1
+  Total_Tax_1:
+    query_name: m_taxamt_sum

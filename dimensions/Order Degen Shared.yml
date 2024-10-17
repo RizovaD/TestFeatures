@@ -1,0 +1,59 @@
+unique_name: Order Degen Shared
+object_type: dimension
+label: Order Degen Shared
+is_degenerate: true
+
+hierarchies:
+
+  - unique_name: Order Degen Shared Hierarchy
+    label: Order Degen Shared Hierarchy
+
+    levels:
+
+      - unique_name: Order Degen Shared Level
+
+        secondary_attributes:
+
+          - unique_name: d_color
+            label: Color on FDT degen secondary
+            dataset: factdemotab (1)
+            name_column: color
+            key_columns:
+              - color
+            sort_column: color
+            allowed_calcs_for_dma:
+              - Lag
+              - Range
+              - Siblings
+
+          - unique_name: d_style
+            label: Style on FIS degen secondary
+            dataset: factinternetsales
+            name_column: style
+            key_columns:
+              - style
+            sort_column: style
+            allowed_calcs_for_dma:
+              - Lag
+              - Range
+              - Siblings
+
+level_attributes:
+
+  - unique_name: Order Degen Shared Level
+    label: Order Degen Shared Level
+    shared_degenerate_columns:
+      - name_column: salesordernumber
+        key_columns:
+          - salesordernumber
+        dataset_name: factinternetsales
+        is_unique: false
+      - name_column: salesordernumber
+        key_columns:
+          - salesordernumber
+        dataset_name: factdemotab (1)
+        is_unique: false
+
+modeler_metadata:
+  version: 0
+  modified: "false"

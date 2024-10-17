@@ -1,0 +1,26 @@
+unique_name: Size_1
+object_type: dimension
+label: Size
+is_degenerate: true
+
+hierarchies:
+
+  - unique_name: Size Hierarchy
+    label: Size Hierarchy
+
+    levels:
+
+      - unique_name: Size Level
+
+level_attributes:
+
+  - unique_name: Size Level
+    label: Size Level
+    dataset: factinternetsales
+    name_column: size
+    key_columns:
+      - size
+
+modeler_metadata:
+  version: 0
+  modified: "false"

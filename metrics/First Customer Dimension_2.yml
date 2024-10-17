@@ -1,0 +1,13 @@
+unique_name: First Customer Dimension_2
+object_type: metric
+label: First Customer Tax Amount
+calculation_method: sum
+semi_additive:
+  position: first
+  dimension: Customer Dimension
+  hierarchy: Customer Hierarchy
+  level: Customer Name
+  role_plays:
+    - "First {0}"
+dataset: factinternetsales
+column: taxamt

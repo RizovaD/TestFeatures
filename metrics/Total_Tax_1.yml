@@ -1,0 +1,7 @@
+unique_name: Total_Tax_1
+object_type: metric
+label: Total Tax
+calculation_method: sum
+unrelated_dimensions_handling: repeat
+dataset: factdemotab (1)
+column: taxamt

@@ -1,0 +1,40 @@
+unique_name: Customer Dim Security
+object_type: dimension
+label: Customer Dim Security
+type: standard
+
+hierarchies:
+
+  - unique_name: Customer Dim Security
+    label: Customer Dim Security
+
+    levels:
+
+      - unique_name: Customer Dim Security_user_id
+
+        secondary_attributes:
+
+          - unique_name: Customer Dim Security_user_id_fks
+            label: Customer Dim Security_fks
+            is_hidden: true
+            dataset: Security2
+            name_column: username
+            role: security
+
+level_attributes:
+
+  - unique_name: Customer Dim Security_user_id
+    label: Customer Dim Security
+    is_hidden: true
+    dataset: Security2
+    name_column: country
+    key_columns:
+      - country
+
+security:
+  filter_key_column: country
+  use_filter_key: true
+  ids_column: username
+  id_type: group
+  scope: related
+  secure_totals: true

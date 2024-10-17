@@ -1,0 +1,9 @@
+unique_name: m_salesamount_per
+object_type: metric
+label: Salesamount
+calculation_method: percentile
+compression: 223
+custom_quantiles:
+  - 0.23
+dataset: factinternetsales
+column: salesamount

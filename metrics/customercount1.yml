@@ -1,0 +1,8 @@
+unique_name: customercount1
+object_type: metric
+label: Customer Count
+calculation_method: count distinct
+format: General Number
+unrelated_dimensions_handling: repeat
+dataset: factinternetsales
+column: customerkey

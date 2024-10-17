@@ -1,0 +1,42 @@
+unique_name: Sales Reasons Bridge
+object_type: dimension
+label: Sales Reasons Bridge
+type: standard
+
+hierarchies:
+
+  - unique_name: Sales Reasons Bridge Hierarchy
+    label: Sales Reasons Bridge Hierarchy
+
+    levels:
+
+      - unique_name: Sales Reasons Bridge Level
+
+level_attributes:
+
+  - unique_name: Sales Reasons Bridge Level
+    label: Sales Reasons Bridge Level
+    dataset: factinternetsalesreason
+    name_column: salesreasonkey
+    key_columns:
+      - salesordernumber
+      - salesorderlinenumber
+
+relationships:
+
+  - unique_name: SalesReasonsBridge_DimSalesReasons
+    from:
+      hierarchy: Sales Reasons Bridge Hierarchy
+      level: Sales Reasons Bridge Level
+      dataset: factinternetsalesreason
+      join_columns:
+        - salesreasonkey
+    to:
+      dimension: Dim Sales Reasons
+      level: Dim Sales Reasons Level
+    type: embedded
+    m2m: true
+
+modeler_metadata:
+  version: 0
+  modified: "false"

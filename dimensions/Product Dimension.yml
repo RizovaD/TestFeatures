@@ -1,0 +1,116 @@
+unique_name: Product Dimension
+object_type: dimension
+label: Product Dimension
+description: "Product Line, Category, and Name"
+type: standard
+
+hierarchies:
+
+  - unique_name: Product Dimension
+    label: Product Hierarchy
+    description: This is the description for my product hier
+    folder: Product Attributes
+    filter_empty: "no"
+
+    levels:
+
+      - unique_name: Product Line
+
+        aliases:
+
+          - unique_name: m_englishproductname_sum_2
+            label: Product Line Alias
+            description: This is an alias for product line
+            is_hidden: true
+            custom_empty_member:
+              key:
+                - Unknown
+              name: Unknown
+              sort_name: Unknown
+            exclude_from_dim_agg: true
+            exclude_from_fact_agg: true
+            create_excludes_on_sort_key: true
+            dataset: dimproduct
+            name_column: englishproductname
+            sort_column: startdate
+            allowed_calcs_for_dma:
+              - Lag
+              - Range
+              - Siblings
+
+      - unique_name: Product Category
+
+        secondary_attributes:
+
+          - unique_name: d_productsubcategoryId
+            label: Product Subcategory ID
+            description: ID of the product category
+            folder: Product Attributes
+            contains_unique_names: true
+            dataset: dimproduct
+            name_column: productsubcategorykey
+            key_columns:
+              - productsubcategorykey
+
+      - unique_name: Product Name
+
+        aliases:
+
+          - unique_name: m_englishproductname_sum
+            label: Product Alias
+            folder: Product Attributes
+            dataset: dimproduct
+            name_column: englishproductname
+            sort_column: productkey
+
+        metrics:
+
+          - unique_name: m_listprice_max
+            label: List Price
+            calculation_method: maximum
+            format: $0.00
+            dataset: dimproduct
+            column: listprice
+
+level_attributes:
+
+  - unique_name: Product Category
+    label: Product Category
+    description: Product Sub Category
+    contains_unique_names: true
+    dataset: dimproduct
+    name_column: productsubcategoryname
+    key_columns:
+      - productline
+      - productsubcategorykey
+
+  - unique_name: Product Line
+    label: Product Line
+    description: Product Line
+    exclude_from_dim_agg: true
+    exclude_from_fact_agg: true
+    create_excludes_on_key: true
+    create_excludes_on_sort_key: true
+    dataset: dimproduct
+    name_column: productline
+    key_columns:
+      - productline
+    sort_column: startdate
+    allowed_calcs_for_dma:
+      - Ancestor
+      - Descendants
+      - Lag
+      - Range
+
+  - unique_name: Product Name
+    label: Product Name
+    description: Full Product Name
+    is_unique_key: true
+    dataset: dimproduct
+    name_column: englishproductname
+    key_columns:
+      - productkey
+
+modeler_metadata:
+  version: 0
+  modified: "false"

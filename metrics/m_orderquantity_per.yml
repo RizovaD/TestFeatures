@@ -1,0 +1,9 @@
+unique_name: m_orderquantity_per
+object_type: metric
+label: Order Quantity Tiles
+calculation_method: percentile
+unrelated_dimensions_handling: empty
+compression: 1000
+named_quantiles: Quartiles
+dataset: factinternetsales
+column: orderquantity

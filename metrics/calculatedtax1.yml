@@ -1,0 +1,9 @@
+unique_name: calculatedtax1
+object_type: metric
+label: Calculated Tax
+description: This is a flat-rate tax for estimation purposes
+calculation_method: sum
+format: "$#,##0.00"
+unrelated_dimensions_handling: error
+dataset: factinternetsales
+column: Calculated Tax

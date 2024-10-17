@@ -1,0 +1,41 @@
+unique_name: Security Dim
+object_type: dimension
+label: Security Dim
+description: This is a mocked up dimension to test security
+type: standard
+
+hierarchies:
+
+  - unique_name: Security Dim
+    label: Security Dim
+
+    levels:
+
+      - unique_name: Security Dim_user_id
+
+        secondary_attributes:
+
+          - unique_name: Security Dim_user_id_fks
+            label: Security Dim_fks
+            is_hidden: true
+            dataset: Security1
+            name_column: username
+            role: security
+
+level_attributes:
+
+  - unique_name: Security Dim_user_id
+    label: Security Dim
+    description: This is a mocked up dimension to test security
+    is_hidden: true
+    dataset: Security1
+    name_column: country
+    key_columns:
+      - country
+
+security:
+  filter_key_column: country
+  ids_column: username
+  id_type: user
+  scope: all
+  secure_totals: false

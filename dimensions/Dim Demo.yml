@@ -1,0 +1,30 @@
+unique_name: Dim Demo
+object_type: dimension
+label: Dim Demo
+description: This dimension is used to showcase a single dataset used for both a dimension
+  and facts
+type: standard
+
+hierarchies:
+
+  - unique_name: Dim Demo Hierarchy
+    label: Dim Demo Hierarchy
+
+    levels:
+
+      - unique_name: Dim Demo Level
+
+level_attributes:
+
+  - unique_name: Dim Demo Level
+    label: Dim Demo Level
+    description: This dimension is used to showcase a single dataset used for both
+      a dimension and facts
+    dataset: factdemotab
+    name_column: salesordernumber
+    key_columns:
+      - salesordernumber
+
+modeler_metadata:
+  version: 0
+  modified: "false"

@@ -1,0 +1,41 @@
+unique_name: Cube 2
+object_type: model
+label: Cube 2
+include_default_drillthrough: true
+
+relationships:
+
+  - unique_name: factdemotab_Dim_Demo
+    from:
+      dataset: factdemotab
+      join_columns:
+        - salesordernumber
+    to:
+      dimension: Dim Demo
+      level: Dim Demo Level
+
+  - unique_name: factdemotab_Product_Dimension
+    from:
+      dataset: factdemotab
+      join_columns:
+        - productkey
+    to:
+      dimension: Product Dimension
+      level: Product Name
+
+dimensions:
+  - Size
+
+metrics:
+
+  - unique_name: m_taxamt_sum
+
+  - unique_name: salesamount1
+    folder: Cube 2 Folder
+
+partitions:
+
+  - unique_name: Cube 2.Size.Size Level.partition
+    dimension: Size
+    attribute: Size Level
+    type: key

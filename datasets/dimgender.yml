@@ -1,0 +1,11 @@
+unique_name: dimgender
+object_type: dataset
+label: dimgender
+connection_id: BigQuery
+sql: select * from `atscale-data-warehouse`.Demo.dimgender
+
+columns:
+  - name: genderkey
+    data_type: string
+  - name: gendername
+    data_type: string
